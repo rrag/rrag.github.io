@@ -1,0 +1,38 @@
+{
+	"requestId": "a4da041c-b6b8-4a2c-b076-da5d99547447",
+	"result": {
+		"total": 2,
+		"startIndex": 0,
+		"endIndex": 1,
+		"nextStartIndex": null,
+		"prevStartIndex": null,
+		"exchange": [
+			{
+				"name": "BSE",
+				"securities": [
+					{
+						"index": 0,
+						"name": "AUTO",
+						"exchange": "BSE",
+						"type": "INDEX",
+						"id": "549b157444aeb063f53823ea",
+						"code": "AUTO"
+					}
+				]
+			},
+			{
+				"name": "NSE",
+				"securities": [
+					{
+						"index": 0,
+						"name": "CNX_AUTO",
+						"exchange": "NSE",
+						"type": "INDEX",
+						"id": "549b159044aeb063f5398862",
+						"code": "CNX_AUTO"
+					}
+				]
+			}
+		]
+	}
+}

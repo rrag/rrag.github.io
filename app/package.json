@@ -1,0 +1,61 @@
+{
+  "name": "rrag.github.io",
+  "version": "0.0.1",
+  "description": "Blog & projects",
+  "main": "src/scripts/index.js",
+  "scripts": {
+    "clean": "rimraf -rf ./build",
+    "copy:docs": "ncp ../../react-stockcharts/build/ ../react-stockcharts",
+    "copy:nextdocs": "ncp ../../react-stockcharts/build/ ../react-stockcharts-next",
+    "copy:fullpage": "ncp ../../react-stockcharts/build/ ../fullpage",
+    "push:docs": "cd .. && git add -A && git commit -m 'update documentation' && git push origin master",
+    "docs": "npm run copy:docs && npm run push:docs",
+    "nextdocs": "npm run copy:nextdocs && npm run push:docs",
+    "fullpage": "npm run copy:fullpage && npm run push:docs",
+    "copy:demo": "cp -r ../../../workspace/chart-xl-web/build/* ../stockcharts-demo/",
+    "push:demo": "cd .. && git add -A && git commit -m 'update demo' && git push origin master",
+    "demo": "npm run copy:demo && npm run push:demo",
+    "watch": "node scripts/watch.js",
+    "build:dev": "webpack --config webpack/webpack.config.dev.js",
+    "build:prod": "webpack --config webpack/webpack.config.prod.js",
+    "build": "npm run clean && npm run build:dev && npm run build:prod",
+    "lint": "eslint src test examples"
+  },
+  "author": "Ragunath Ramaswamy",
+  "homepage": "https://github.com/rrag/react-webpack-hmr-starter",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
+    "babel-core": "^5.8.21",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.15.6",
+    "express": "^4.13.3",
+    "file-loader": "^0.8.4",
+    "json-loader": "^0.5.2",
+    "jsx-loader": "^0.13.2",
+    "ncp": "^2.0.0",
+    "react-hot-loader": "^1.2.8",
+    "rimraf": "^2.4.2",
+    "sass-loader": "^1.0.4",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ]
+    ]
+  }
+}
