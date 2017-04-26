@@ -40,6 +40,8 @@
 					</p>
 					<p style="text-align: right; margin-right: 10%; margin-top: 10px;">
 						<small>Ragunath Ramaswamy</small>
+                        <br >
+						<small>author of <strong style="color: red;">react-stockcharts</strong></small>
 					</p>
 					<aside class="notes">
 						<p>Hello everyone, I am Ragunath Ramaswamy. I have been working until recently at Sears</p>
@@ -48,153 +50,13 @@
 					</aside>
 				</section>
 				<section>
-					<h3>SVG and Canvas</h3>
+					<p style="font-size: 250%;">http://bit.ly/2q3of2y</p>
 				</section>
 				<section>
-					<pre><code class="hljs html" style="word-wrap: break-word;" data-trim data-noescape>
-						&lt;svg height="100" width="100">
-						  &lt;path stroke="white" fill="none"
-						    d="M50,0 L100,50 L0,50 L50,100">
-						  &lt;/path>
-						  &lt;-- draw a path with stroke white and no fill,
-						    move to 0,0 and draw a line to 100,50
-						    line to 0,50, line to 50, 100  -->
-						&lt;/svg>
-						</code></pre>
-					<svg height="100" width="100">
-						<path d="M50,0 L100,50 L0,50 L50,100" stroke="white" fill="none" />
-					</svg>
-					<aside class="notes">
-						<p>When creating data viz the HTML 5 choices are svg and canvas</p>
-						<p>svg is a declarative way of creating elements</p>
-						<p>some svg elements are</p>
-						<p>Any drawing in svg is a combination of multiple shapes</p>
-					</aside>
+					<h3>React-stockcharts</h3>
+                    <p>Highly customizable stock charts with ReactJS and d3</p>
 				</section>
-				<section>
-					<h4>Use D3 to draw a path</h4>
-					<pre><code class="hljs html" style="word-wrap: break-word;" data-trim data-noescape>
-						&lt;svg id="<mark>d3-path</mark>">&lt;/svg>
-						</code></pre>
-					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim data-noescape>
-						var path = d3.path();
-						path.moveTo(50, 0);
-						path.lineTo(100, 50);
-						path.lineTo(0, 50);
-						path.lineTo(50, 100);
 
-						d3.selectAll("#d3-path")
-						  .attr("width", 100)
-						  .attr("height", 100)
-						  .append("path")
-						    .attr("d", path.toString())
-						    .attr("stroke", "white")
-						    .attr("fill", "none")
-						</code></pre>
-					<svg id="d3-path"></svg>
-					<script>
-						var path = d3.path();
-						path.moveTo(50, 0);
-						path.lineTo(100, 50);
-						path.lineTo(0, 50);
-						path.lineTo(50, 100);
-
-						d3.selectAll("#d3-path")
-							.attr("width", 100)
-							.attr("height", 100)
-							.append("path")
-								.attr("d", path.toString())
-								.attr("stroke", "white")
-								.attr("fill", "none")
-					</script>
-				</section>
-				<section>
-					<h4>D3 with React</h4>
-					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim>
-						render() {
-						  var path = d3.path();
-						  path.moveTo(50, 0);
-						  path.lineTo(100, 50);
-						  path.lineTo(0, 50);
-						  path.lineTo(50, 100);
-
-						  return (
-						    &lt;svg width="100" height="100">
-						      &lt;path d={path.toString()} stroke="white" "fill"="none"/>
-						    &lt;/svg>
-						  )
-						}
-						</code></pre>
-				</section>
-				<section>
-					<h4>Some examples of React & D3</h4>
-					<ul>
-						<li>react-d3</li>
-						<li>react-d3-components</li>
-						<li>victory</li>
-						<li>recharts</li>
-						<li>...and many more</li>
-					</ul>
-				</section>
-				<section>
-					<h4>Canvas</h4>
-
-					<pre><code class="hljs html" style="word-wrap: break-word;" data-trim data-noescape>
-						&lt;canvas id="<mark>plot</mark>"
-						  width="100" height="100">
-						&lt;/canvas>
-						</code></pre>
-					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim data-noescape>
-						var context = document.getElementById("<mark>plot</mark>").getContext("2d");
-						context.strokeStyle = "white"
-						context.moveTo(50, 0);
-						context.lineTo(100, 50);
-						context.lineTo(0, 50);
-						context.lineTo(50, 100);
-						context.stroke();
-						</code></pre>
-					<canvas id="plot" width="100" height="100"></canvas>
-					<script>
-						var context = document.getElementById("plot").getContext("2d");
-						context.strokeStyle = "white"
-						context.moveTo(50, 0);
-						context.lineTo(100, 50);
-						context.lineTo(0, 50);
-						context.lineTo(50, 100);
-						context.stroke();
-					</script>
-					<aside class="notes">
-						<p>Canvas has an imperative api</p>
-						<p>you get the 2d context and call different methods on the context to draw different shapes</p>
-						<p>context.rect to draw a rectangle or square</p>
-						<p>context.ellipse to draw an ellipse or a circle</p>
-						<p>context.arc and the works</p>
-					</aside>
-				</section>
-				<section>
-   					<h4>Rendering to canvas using React</h4>
-					<pre><code class="hljs js" style="word-wrap: break-word; line-height: 20px; font-size: 70%;" data-trim data-noescape>
-						componentDidMount() {
-						  this.draw()
-						}
-						componentDidUpdate() {
-						  this.draw()
-						}
-						draw() {
-						  let ctx = this.canvasNode.getContext("2d")
-						  ctx.rect(...)
-						  ctx.line(...)
-						  ctx.moveTo(...)
-						  ctx.lineTo(...)
-						}
-						render() {
-						  return (
-						    &lt;canvas ref={node => { this.canvasNode = node }} width={...} height={...}>
-						    &lt;/canvas>
-						  )
-						}
-						</code></pre>
-				</section>
 				<section data-background="#ffffff">
 					<h4 style="color: chocolate;">A chart with multiple shapes</h4>
 
@@ -370,22 +232,9 @@
 						<p>Since svg is composable DOM objects, it is easier to develop and debug</p>
 					</aside>
 				</section>
-				<section>
-                    <p>Open <a href="http://rrag.github.io/fullpage/documentation.html">http://rrag.github.io/fullpage/documentation.html</a></p>
-					<aside class="notes">
-						<p>
-                            Talk about common funcitonality like identifying extents,
-                            zoom & pan
-                        </p>
-						<p>Number of objects</p>
-						<p>performance of svg compared to canvas</p>
-					</aside>
-				</section>
-				<section>
-                    <img src="assets/complexchart2.png" />
-				</section>
-				<section>
-                    <h3>Enter react-stockcharts</h3>
+                <section>
+                    <h3>Stockchart has to be</h3>
+                    <p>Customizable</p>
 				</section>
 				<section>
 					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim data-noescape>
@@ -440,6 +289,172 @@
                     <img src="assets/candlestickwvolumebar.png" />
 				</section>
 				<section>
+                    <img src="assets/complexchart2.png" />
+				</section>
+                <section>
+                    <h3>Stockchart has to be</h3>
+                    <p>Highly performant</p>
+				</section>
+				<section>
+					<h3>SVG and Canvas</h3>
+				</section>
+				<section>
+					<pre><code class="hljs html" style="word-wrap: break-word;" data-trim data-noescape>
+						&lt;svg height="100" width="100">
+						  &lt;path stroke="white" fill="none"
+						    d="M50,0 L100,50 L0,50 L50,100">
+						  &lt;/path>
+						  &lt;-- draw a path with stroke white and no fill,
+						    move to 0,0 and draw a line to 100,50
+						    line to 0,50, line to 50, 100  -->
+						&lt;/svg>
+						</code></pre>
+					<svg height="100" width="100">
+						<path d="M50,0 L100,50 L0,50 L50,100" stroke="white" fill="none" />
+					</svg>
+					<aside class="notes">
+						<p>When creating data viz the HTML 5 choices are svg and canvas</p>
+						<p>svg is a declarative way of creating elements</p>
+						<p>some svg elements are</p>
+						<p>Any drawing in svg is a combination of multiple shapes</p>
+					</aside>
+				</section>
+				<section>
+					<h4>Use D3 to draw a path</h4>
+					<pre><code class="hljs html" style="word-wrap: break-word;" data-trim data-noescape>
+						&lt;svg id="<mark>d3-path</mark>">&lt;/svg>
+						</code></pre>
+					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim data-noescape>
+						var path = d3.path();
+						path.moveTo(50, 0);
+						path.lineTo(100, 50);
+						path.lineTo(0, 50);
+						path.lineTo(50, 100);
+
+						d3.selectAll("#d3-path")
+						  .attr("width", 100)
+						  .attr("height", 100)
+						  .append("path")
+						    .attr("d", path.toString())
+						    .attr("stroke", "white")
+						    .attr("fill", "none")
+						</code></pre>
+					<svg id="d3-path"></svg>
+					<script>
+						var path = d3.path();
+						path.moveTo(50, 0);
+						path.lineTo(100, 50);
+						path.lineTo(0, 50);
+						path.lineTo(50, 100);
+
+						d3.selectAll("#d3-path")
+							.attr("width", 100)
+							.attr("height", 100)
+							.append("path")
+								.attr("d", path.toString())
+								.attr("stroke", "white")
+								.attr("fill", "none")
+					</script>
+				</section>
+				<section>
+					<h4>D3 with React</h4>
+					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim>
+						render() {
+						  var path = d3.path();
+						  path.moveTo(50, 0);
+						  path.lineTo(100, 50);
+						  path.lineTo(0, 50);
+						  path.lineTo(50, 100);
+
+						  return (
+						    &lt;svg width="100" height="100">
+						      &lt;path d={path.toString()} stroke="white" "fill"="none"/>
+						    &lt;/svg>
+						  )
+						}
+						</code></pre>
+				</section>
+				<section>
+					<h4>Some examples of React & D3</h4>
+					<ul>
+						<li>react-d3</li>
+						<li>react-d3-components</li>
+						<li>victory</li>
+						<li>recharts</li>
+						<li>...and many more</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Canvas</h4>
+
+					<pre><code class="hljs html" style="word-wrap: break-word;" data-trim data-noescape>
+						&lt;canvas id="<mark>plot</mark>"
+						  width="100" height="100">
+						&lt;/canvas>
+						</code></pre>
+					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim data-noescape>
+						var context = document.getElementById("<mark>plot</mark>").getContext("2d");
+						context.strokeStyle = "white"
+						context.moveTo(50, 0);
+						context.lineTo(100, 50);
+						context.lineTo(0, 50);
+						context.lineTo(50, 100);
+						context.stroke();
+						</code></pre>
+					<canvas id="plot" width="100" height="100"></canvas>
+					<script>
+						var context = document.getElementById("plot").getContext("2d");
+						context.strokeStyle = "white"
+						context.moveTo(50, 0);
+						context.lineTo(100, 50);
+						context.lineTo(0, 50);
+						context.lineTo(50, 100);
+						context.stroke();
+					</script>
+					<aside class="notes">
+						<p>Canvas has an imperative api</p>
+						<p>you get the 2d context and call different methods on the context to draw different shapes</p>
+						<p>context.rect to draw a rectangle or square</p>
+						<p>context.ellipse to draw an ellipse or a circle</p>
+						<p>context.arc and the works</p>
+					</aside>
+				</section>
+				<section>
+   					<h4>Rendering to canvas using React</h4>
+					<pre><code class="hljs js" style="word-wrap: break-word; line-height: 20px; font-size: 70%;" data-trim data-noescape>
+						componentDidMount() {
+						  this.draw()
+						}
+						componentDidUpdate() {
+						  this.draw()
+						}
+						draw() {
+						  let ctx = this.canvasNode.getContext("2d")
+						  ctx.rect(...)
+						  ctx.line(...)
+						  ctx.moveTo(...)
+						  ctx.lineTo(...)
+						}
+						render() {
+						  return (
+						    &lt;canvas ref={node => { this.canvasNode = node }} width={...} height={...}>
+						    &lt;/canvas>
+						  )
+						}
+						</code></pre>
+				</section>
+				<section>
+                    <p>Open <a href="http://rrag.github.io/fullpage/documentation.html">http://rrag.github.io/fullpage/documentation.html</a></p>
+					<aside class="notes">
+						<p>
+                            Talk about common funcitonality like identifying extents,
+                            zoom & pan
+                        </p>
+						<p>Number of objects</p>
+						<p>performance of svg compared to canvas</p>
+					</aside>
+				</section>
+				<section>
    					<h4>Flame graph with svg</h4>
                     <img src="assets/svg-flamechart.png" />
 				</section>
@@ -455,6 +470,28 @@
 				<section>
    					<h4>Flame graph with canvas</h4>
                     <img src="assets/canvas-flamechart.png" />
+				</section>
+				<section>
+                    <table style="font-size: 250%;">
+                        <tr>
+                            <th>SVG</th>
+                            <th>canvas</th>
+                        </tr>
+                        <tr>
+                            <td>< 5 fps</td>
+                            <td>30 fps</td>
+                        </tr>
+                    </table>
+				</section>
+
+                <section>
+                    <h3>react-stockcharts is</h3>
+                    <p>Highly performant</p>
+                    <p>Customizable</p>
+                    <p>Easy to debug</p>
+				</section>
+				<section>
+					<h2>Thank you</h2>
 				</section>
 			</div>
 		</div>
