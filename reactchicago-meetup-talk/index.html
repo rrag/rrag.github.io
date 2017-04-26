@@ -330,7 +330,7 @@
 						path.lineTo(0, 50);
 						path.lineTo(50, 100);
 
-						d3.selectAll("#d3-path")
+						d3.selectAll("#<mark>d3-path</mark>")
 						  .attr("width", 100)
 						  .attr("height", 100)
 						  .append("path")
@@ -482,6 +482,34 @@
                         </tr>
                     </table>
 				</section>
+                <section>
+					<pre><code class="hljs js" style="word-wrap: break-word;" data-trim data-noescape>
+						render() {
+						  return (
+						    &lt;ChartCanvas width={...} height={400} data={...} ...>
+						      &lt;Chart ...>
+						        &lt;XAxis axisAt="bottom" orient="bottom" ... />
+						        &lt;YAxis axisAt="right" orient="right" ... />
+						        &lt;CandlestickSeries ... />
+						      &lt;/Chart>
+						      &lt;Chart origin={(w, h) => [0, h - 150]} height={150} ...>
+						        &lt;YAxis axisAt="left" orient="left" ... />
+						        &lt;BarSeries ... />
+						      &lt;/Chart>
+						    &lt;/ChartCanvas>
+						  )
+						}
+						</code></pre>
+                </section>
+                <section>
+						<p>`ChartCanvas` does the magic</p>
+					<p style="text-align: left;">- Does all the math, optimizes the operations so a
+						    new animation frame is fired after the prev one is complete</p>
+					<p style="text-align: left;">- Creates 3 canvases on top of each other, one canvas is used just
+						    for mouse move cursor, one for background text,
+						     and one where the actual chart is drawn</p>
+					<p style="text-align: left;">- Passes the canvas context via the react context to all its children</p>
+                </section>
                 <section>
 					<div style="text-align: left; position: absolute; top: 0%; left: 0%; width: 60%;">
 						<p>svg is <span class="fragment" data-fragment-index="0">composable</span></p>
